@@ -1,0 +1,17 @@
+# This file lists all the python libraries neeeded for running code
+# in this repo.
+#
+# How to deploy (in Windows)
+# 1. Install Python Python 3.7.2  32bit
+# 2. Install mongodb-win32-x86_64-2008plus-ssl-4.0.6-signed.msi
+#    from https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows-unattended/
+# 3. pip2 install -r requirements.txt #  (this file)
+#    python -m pip install -r requirements.txt #  (this file)
+#
+# To update this file use pipreqs, but use caution.
+
+
+beautifulsoup4==4.7.1
+bs4==0.0.1
+pymongo==3.7.2
+soupsieve==1.8
