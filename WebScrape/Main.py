@@ -19,14 +19,14 @@ def main():
 
         html_collections_converted_to_obj = scraper.get_data_from_html_to_obj()
         db_collections_converted_obj = container.json_collections_to_obj(db.read_collections_from_db())
-        db.set_true_for_valid_incoming_Images(container.turn_valid_collections(db.find_invalid_collections_from_db(),
-                                                                               html_collections_converted_to_obj))
+        db.set_validity_for_collections(container.turn_valid_collections(db.find_invalid_collections_from_db(),
+                                                                         html_collections_converted_to_obj), True)
 
         dic_of_collections = container.get_object_lists_differences(db_collections_converted_obj,
                                                                     html_collections_converted_to_obj)
 
         if len(dic_of_collections['from_db']) > 0:
-            db.set_false_for_not_listed_collections(container.objects_list_to_json(dic_of_collections['from_db']))
+            db.set_validity_for_collections(container.objects_list_to_json(dic_of_collections['from_db']), False)
             scraper.show_missing_elements(dic_of_collections['from_db'])
         if len(dic_of_collections['from_html']) > 0:
             db.fill_collections_to_db(container.objects_list_to_json(dic_of_collections['from_html']))

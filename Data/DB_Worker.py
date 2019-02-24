@@ -53,23 +53,13 @@ class MongoDB:
         except Exception as e:
             raise Exception("Something went wrong during DB reading:{}".format(e))
 
-    def set_false_for_not_listed_collections(self, collection_list):
-        """This function will get list of collection and set the bit is_valid to False"""
+    def set_validity_for_collections(self, collection_list, bool_val):
+        """This function will get list of collection and set the bit is_valid"""
         try:
             collection = self.db_collection
             for i in collection_list:
                 if self._is_collection_exist(i):
-                    collection.update_many({"sha": i['sha']}, {"$set": {"is_valid": False}})
-        except Exception as e:
-            raise Exception("Something went wrong during value updating collections:{}".format(e))
-
-    def set_true_for_valid_incoming_Images(self, collection_list):
-        """This function will get list of collection and set the bit is_valid to False"""
-        try:
-            collection = self.db_collection
-            for i in collection_list:
-                if self._is_collection_exist(i):
-                    collection.update_many({"sha": i['sha']}, {"$set": {"is_valid": True}})
+                    collection.update_many({"sha": i['sha']}, {"$set": {"is_valid": bool_val}})
         except Exception as e:
             raise Exception("Something went wrong during value updating collections:{}".format(e))
 
